@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block title %}Sign up · JournalNest{% endblock %}
+
+{% block content %}
+<section class="auth-card">
+  <h1>Create your shelf</h1>
+  <p class="auth-card__hint">Your notebooks are private to your account.</p>
+  <form method="post" novalidate>
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn--primary">Sign up</button>
+  </form>
+  <p class="auth-card__alt">Already have an account? <a href="{% url 'login' %}">Log in</a>.</p>
+</section>
+{% endblock %}

@@ -1,0 +1,15 @@
+<ul class="page-list">
+  {% for entry in notes %}
+    <li class="page-list__item {% if entry.pk == note.pk %}is-current{% endif %}">
+      <a href="{% url 'notebook_open' pk=notebook.pk %}?note={{ entry.pk }}">
+        {{ entry.title|default:"Untitled note" }}
+      </a>
+    </li>
+  {% empty %}
+    <li class="page-list__empty">No notes yet.</li>
+  {% endfor %}
+</ul>
+<form method="post" action="{% url 'note_create' pk=notebook.pk %}">
+  {% csrf_token %}
+  <button type="submit" class="btn btn--ghost btn--block">Add note</button>
+</form>

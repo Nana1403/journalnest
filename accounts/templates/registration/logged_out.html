@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block title %}Logged out · JournalNest{% endblock %}
+
+{% block content %}
+<section class="auth-card">
+  <h1>You're logged out</h1>
+  <p class="auth-card__alt"><a href="{% url 'login' %}">Log back in</a></p>
+</section>
+{% endblock %}

@@ -1,0 +1,782 @@
+/* ============================================================
+   JournalNest — playful / cute / cartoonish theme
+   Palette: #003844 #006C67 #F194B4 #FFB100 #FFEBC6
+   ============================================================ */
+
+:root {
+  /* raw palette */
+  --deep-sea: #003844;
+  --teal: #006C67;
+  --bubblegum: #F194B4;
+  --marmalade: #FFB100;
+  --cream: #FFEBC6;
+
+  /* tints / derived */
+  --teal-soft: #a8dad5;
+  --honey: #ffd98a;
+  --cream-pale: #fff7e9;
+  --cream-deep: #ffe0ab;
+  --pink-wash: #ffe0ea;
+
+  /* roles */
+  --ink: var(--deep-sea);
+  --ink-soft: #4a6a70;
+  --page-bg: var(--cream);
+  --card-bg: var(--cream-pale);
+  --paper: var(--cream-pale);
+  --rule: #cfe6e2;
+  --margin-line: var(--bubblegum);
+
+  --line: 2rem;                 /* shared by ruled paper + editor */
+  --radius: 20px;
+  --radius-lg: 28px;
+  --border: 3px solid var(--ink);
+  --pop: 5px 5px 0 var(--ink);  /* comic-style hard shadow */
+  --pop-sm: 3px 3px 0 var(--ink);
+
+  --font-ui: "Nunito", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-display: "Fredoka", "Nunito", system-ui, sans-serif;
+  --font-read: "Nunito", Georgia, serif;
+  --font-caveat: "Caveat", "Bradley Hand", cursive;
+  --font-patrick_hand: "Patrick Hand", "Comic Sans MS", cursive;
+  --font-shadows: "Shadows Into Light", "Segoe Print", cursive;
+  --font-gaegu: "Gaegu", "Comic Sans MS", cursive;
+}
+
+
+/* ============================================================
+   RESET & BASE STYLES
+   ============================================================ */
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: var(--font-ui);
+  font-weight: 600;
+  color: var(--ink);
+  background-color: var(--page-bg);
+  background-image: radial-gradient(var(--teal-soft) 1.5px, transparent 1.6px);
+  background-size: 26px 26px;
+  line-height: 1.55;
+}
+
+a { color: var(--teal); text-underline-offset: 3px; }
+
+h1, h2, h3 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  letter-spacing: 0.3px;
+}
+
+
+/* ============================================================
+   HEADER
+   ============================================================ */
+
+.site-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.7rem 1.4rem;
+  background: var(--marmalade);
+  border-bottom: var(--border);
+}
+
+.site-header__brand {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.3rem;
+  text-decoration: none;
+  color: var(--ink);
+}
+
+.site-header__nav {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+}
+
+.site-header__nav a {
+  color: var(--ink);
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.site-header__nav a:hover { text-decoration: underline wavy; }
+.site-header__nav form { margin: 0; }
+
+.linkbtn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--ink);
+  font: inherit;
+  font-weight: 700;
+  padding: 0;
+  text-decoration: underline wavy;
+}
+
+.site-main {
+  max-width: 1040px;
+  margin: 0 auto;
+  padding: 1.8rem 1.4rem 3.5rem;
+}
+
+.messages {
+  list-style: none;
+  padding: 0;
+  margin: 1rem auto;
+  max-width: 1040px;
+}
+
+.messages__item {
+  padding: 0.6rem 0.9rem;
+  border: var(--border);
+  border-radius: var(--radius);
+  background: var(--teal-soft);
+  box-shadow: var(--pop-sm);
+  font-weight: 700;
+}
+
+
+/* ============================================================
+   BUTTONS
+   ============================================================ */
+
+.btn {
+  display: inline-block;
+  padding: 0.55rem 1.15rem;
+  border: var(--border);
+  border-radius: 999px;
+  font: inherit;
+  font-weight: 800;
+  cursor: pointer;
+  text-decoration: none;
+  color: var(--ink);
+  background: var(--cream-pale);
+  box-shadow: var(--pop-sm);
+  transition: transform 0.1s ease, box-shadow 0.1s ease, background 0.15s ease;
+}
+
+.btn:hover {
+  transform: translate(-1px, -1px);
+  box-shadow: 4px 4px 0 var(--ink);
+}
+
+.btn:active {
+  transform: translate(3px, 3px);
+  box-shadow: 0 0 0 var(--ink);
+}
+
+.btn--primary {
+  background: var(--teal);
+  color: var(--cream);
+}
+
+.btn--ghost { background: var(--cream-pale); }
+.btn--danger { background: var(--bubblegum); color: var(--ink); }
+.btn--block {
+  display: block;
+  width: 100%;
+  margin-top: 0.7rem;
+  text-align: center;
+}
+
+.btn.is-disabled {
+  opacity: 0.45;
+  pointer-events: none;
+  box-shadow: none;
+}
+
+:focus-visible {
+  outline: 3px dashed var(--teal);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+
+/* ============================================================
+   AUTH CARDS
+   ============================================================ */
+
+.auth-card {
+  max-width: 400px;
+  margin: 2.5rem auto;
+  padding: 1.9rem;
+  background: var(--card-bg);
+  border: var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--pop);
+}
+
+.auth-card h1 { margin-top: 0; }
+.auth-card__hint,
+.auth-card__alt {
+  color: var(--ink-soft);
+  font-weight: 600;
+}
+
+.auth-card form p { margin: 0.7rem 0; }
+.auth-card label { font-weight: 800; }
+
+.auth-card input {
+  width: 100%;
+  padding: 0.55rem 0.7rem;
+  border: var(--border);
+  border-radius: 12px;
+  font: inherit;
+  font-weight: 600;
+  background: #fff;
+}
+
+.auth-card .helptext,
+.auth-card ul {
+  font-size: 0.82rem;
+  color: var(--ink-soft);
+  font-weight: 600;
+}
+
+
+/* ============================================================
+   SHELF (Notebook Listing)
+   ============================================================ */
+
+.shelf-page__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 1.6rem;
+}
+
+.shelf-page__head h1 {
+  margin: 0;
+  position: relative;
+}
+
+.shelf-page__head h1::after {
+  content: "";
+  display: block;
+  height: 8px;
+  width: 62%;
+  margin-top: 4px;
+  border-radius: 999px;
+  background: var(--marmalade);
+}
+
+.shelf {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(170px, 200px));
+  justify-content: start;
+  gap: 2rem 2.2rem;
+}
+
+.shelf__item { text-decoration: none; display: block; }
+.shelf__item:nth-child(odd) .cover { transform: rotate(-2deg); }
+.shelf__item:nth-child(even) .cover { transform: rotate(1.5deg); }
+.shelf__item:hover .cover {
+  transform: rotate(0deg) translateY(-6px);
+  box-shadow: 8px 10px 0 var(--ink);
+}
+
+.empty {
+  text-align: center;
+  color: var(--ink-soft);
+  font-weight: 700;
+  background: var(--card-bg);
+  border: var(--border);
+  border-radius: var(--radius-lg);
+  padding: 2.6rem 1.4rem;
+  box-shadow: var(--pop);
+}
+
+.empty p { margin: 0.3rem 0; }
+.empty .btn { margin-top: 1rem; }
+
+
+/* ============================================================
+   NOTEBOOK COVER
+   ============================================================ */
+
+.cover {
+  position: relative;
+  aspect-ratio: 3 / 4;
+  border: var(--border);
+  border-radius: 8px var(--radius) var(--radius) 8px;
+  box-shadow: var(--pop);
+  padding: 1.4rem 1.1rem 1.1rem 1.8rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.7rem;
+  overflow: hidden;
+  color: var(--cover-ink, var(--ink));
+  background: var(--cover-bg, var(--cream));
+  transition: transform 0.12s ease, box-shadow 0.12s ease;
+}
+
+.cover__spine {
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 16px;
+  background: rgba(0, 0, 0, 0.16);
+  border-right: 3px solid var(--ink);
+}
+
+.cover__label {
+  position: relative;
+  align-self: center;
+  background: var(--cream-pale);
+  color: var(--ink);
+  border: 3px solid var(--ink);
+  border-radius: 10px;
+  padding: 0.45rem 0.8rem;
+  font-size: 1.7rem;
+  line-height: 1.15;
+  text-align: center;
+  box-shadow: var(--pop-sm);
+  max-width: 100%;
+  word-break: break-word;
+  transform: rotate(-1.5deg);
+}
+
+.cover__label::before {
+  content: "";
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  width: 46px;
+  height: 18px;
+  transform: translateX(-50%) rotate(-4deg);
+  background: rgba(255, 177, 0, 0.65);
+  border: 2px solid rgba(0, 56, 68, 0.35);
+}
+
+.cover__type {
+  align-self: center;
+  font-family: var(--font-display);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  opacity: 0.75;
+}
+
+/* cover colour variants */
+.cover--cream    { --cover-bg: var(--cream); }
+.cover--blush    { --cover-bg: var(--bubblegum); }
+.cover--sage     { --cover-bg: var(--teal-soft); }
+.cover--lavender { --cover-bg: var(--honey); }
+.cover--sky      { --cover-bg: var(--teal); --cover-ink: var(--cream); }
+.cover--burgundy { --cover-bg: var(--deep-sea); --cover-ink: var(--cream); }
+
+/* cover patterns */
+.cover--pattern-dots {
+  background-image: radial-gradient(rgba(0, 56, 68, 0.18) 2.5px, transparent 2.6px);
+  background-size: 20px 20px;
+}
+
+.cover--pattern-stripes {
+  background-image: repeating-linear-gradient(
+    45deg, rgba(0, 56, 68, 0.12) 0 12px, transparent 12px 24px
+  );
+}
+
+.cover--pattern-grid {
+  background-image:
+    linear-gradient(rgba(0, 56, 68, 0.14) 2px, transparent 2px),
+    linear-gradient(90deg, rgba(0, 56, 68, 0.14) 2px, transparent 2px);
+  background-size: 24px 24px;
+}
+
+.cover--pattern-floral {
+  background-image:
+    radial-gradient(circle at 22% 28%, rgba(255, 255, 255, 0.55) 0 7px, transparent 8px),
+    radial-gradient(circle at 72% 62%, rgba(255, 177, 0, 0.5) 0 6px, transparent 7px),
+    radial-gradient(circle at 46% 82%, rgba(241, 148, 180, 0.55) 0 5px, transparent 6px);
+  background-size: 96px 96px;
+}
+
+
+/* ============================================================
+   FONT UTILITIES
+   ============================================================ */
+
+.font-caveat { font-family: var(--font-caveat); }
+.font-patrick_hand { font-family: var(--font-patrick_hand); }
+.font-shadows { font-family: var(--font-shadows); }
+.font-gaegu { font-family: var(--font-gaegu); }
+
+
+/* ============================================================
+   NOTEBOOK CREATE FORM
+   ============================================================ */
+
+.notebook-form h1 { position: relative; }
+
+.notebook-form h1::after {
+  content: "";
+  display: block;
+  height: 8px;
+  width: 200px;
+  margin-top: 4px;
+  border-radius: 999px;
+  background: var(--bubblegum);
+}
+
+.notebook-form__grid {
+  display: grid;
+  grid-template-columns: 1fr 260px;
+  gap: 2.2rem;
+  align-items: start;
+}
+
+.notebook-form__fields {
+  display: flex;
+  flex-direction: column;
+  gap: 1.3rem;
+  background: var(--card-bg);
+  border: var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--pop);
+  padding: 1.4rem;
+}
+
+.field {
+  border: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+
+.field__label {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.05rem;
+}
+
+.field__hint {
+  margin: 0;
+  color: var(--ink-soft);
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.field input[type="text"] {
+  padding: 0.55rem 0.7rem;
+  border: var(--border);
+  border-radius: 12px;
+  font: inherit;
+  font-weight: 700;
+  background: #fff;
+}
+
+/* Django RadioSelect */
+.notebook-form__fields fieldset.field > div {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 0.6rem;
+}
+
+.notebook-form__fields fieldset.field label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-weight: 700;
+  background: #fff;
+  border: 3px solid var(--ink);
+  border-radius: 999px;
+  padding: 0.3rem 0.8rem;
+  cursor: pointer;
+  transition: background 0.12s ease, box-shadow 0.12s ease;
+}
+
+.notebook-form__fields fieldset.field label:hover {
+  background: var(--cream-deep);
+}
+
+.notebook-form__fields fieldset.field label:has(input:checked) {
+  background: var(--honey);
+  box-shadow: var(--pop-sm);
+}
+
+.notebook-form__fields fieldset.field legend + .field__hint {
+  margin-bottom: 0.3rem;
+}
+
+.notebook-form__preview {
+  position: sticky;
+  top: 1rem;
+  text-align: center;
+}
+
+.notebook-form__preview .field__label {
+  display: block;
+  margin-bottom: 0.6rem;
+}
+
+
+/* ============================================================
+   OPEN NOTEBOOK
+   ============================================================ */
+
+.notebook-view__bar {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.2rem;
+  flex-wrap: wrap;
+}
+
+.notebook-view__title {
+  margin: 0;
+  font-size: 2.2rem;
+}
+
+.notebook-view__body {
+  display: grid;
+  grid-template-columns: 230px 1fr;
+  gap: 1.8rem;
+  align-items: start;
+}
+
+.notebook-view__nav {
+  background: var(--card-bg);
+  border: var(--border);
+  border-radius: var(--radius-lg);
+  padding: 1rem;
+  box-shadow: var(--pop);
+}
+
+.notebook-view__nav summary {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.1rem;
+  cursor: pointer;
+}
+
+.page-list {
+  list-style: none;
+  padding: 0;
+  margin: 0.7rem 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.page-list__item a {
+  display: block;
+  padding: 0.45rem 0.6rem;
+  border-radius: 12px;
+  text-decoration: none;
+  color: var(--ink);
+  font-weight: 700;
+  border: 3px solid transparent;
+}
+
+.page-list__item a:hover {
+  background: #fff;
+  border-color: var(--ink);
+}
+
+.page-list__item.is-current a {
+  background: var(--bubblegum);
+  border-color: var(--ink);
+  box-shadow: var(--pop-sm);
+}
+
+.page-list__empty {
+  color: var(--ink-soft);
+  padding: 0.4rem 0.6rem;
+  font-weight: 700;
+}
+
+
+/* ============================================================
+   EDITOR CONTROLS
+   ============================================================ */
+
+.editor-controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 0.9rem;
+}
+
+.editor-controls__right {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+}
+
+.editor-controls form { margin: 0; }
+
+.pager {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.save-status {
+  font-family: var(--font-display);
+  font-size: 0.85rem;
+  font-weight: 700;
+  padding: 0.35rem 0.8rem;
+  border: 3px solid var(--ink);
+  border-radius: 999px;
+  background: var(--cream-deep);
+  box-shadow: var(--pop-sm);
+}
+
+.save-status[data-state="unsaved"] { background: var(--honey); }
+.save-status[data-state="saving"] { background: var(--teal-soft); }
+.save-status[data-state="saved"] { background: var(--teal); color: var(--cream); }
+.save-status[data-state="error"] { background: var(--bubblegum); }
+
+.conflict-banner {
+  background: var(--pink-wash);
+  border: var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--pop-sm);
+  padding: 1rem;
+  margin-bottom: 0.9rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  align-items: center;
+  font-weight: 700;
+}
+
+.conflict-banner[hidden] { display: none; }
+.conflict-banner p {
+  margin: 0 0.4rem 0 0;
+  flex: 1 1 100%;
+}
+
+
+/* ============================================================
+   PAPER SHEET
+   ============================================================ */
+
+.paper {
+  display: flex;
+  background: var(--paper);
+  border: var(--border);
+  border-radius: 8px var(--radius-lg) var(--radius-lg) 8px;
+  box-shadow: var(--pop);
+  overflow: hidden;
+}
+
+.paper__binding {
+  flex: 0 0 38px;
+  background:
+    radial-gradient(circle at 50% 14px, var(--marmalade) 0 5px, transparent 6px) 0 0 / 100% 32px repeat-y,
+    linear-gradient(90deg, var(--honey), var(--cream-deep));
+  border-right: 3px solid var(--ink);
+}
+
+.paper__sheet {
+  flex: 1;
+  padding: var(--line) 1.5rem var(--line) 3.4rem;
+  position: relative;
+  background-image:
+    linear-gradient(90deg, transparent 2.5rem, var(--margin-line) 2.5rem, var(--margin-line) calc(2.5rem + 3px), transparent calc(2.5rem + 3px)),
+    repeating-linear-gradient(var(--paper) 0, var(--paper) calc(var(--line) - 2px), var(--rule) calc(var(--line) - 2px), var(--rule) var(--line));
+  background-position: 0 0, 0 calc(var(--line) - 0.35rem);
+}
+
+.paper__title {
+  display: block;
+  width: 100%;
+  border: none;
+  background: transparent;
+  font-family: var(--font-caveat);
+  font-size: 2rem;
+  line-height: var(--line);
+  color: var(--ink);
+  margin-bottom: var(--line);
+  font-weight: 700;
+}
+
+.paper__title:focus { outline: none; }
+
+.paper__body {
+  display: block;
+  width: 100%;
+  min-height: calc(var(--line) * 12);
+  border: none;
+  background: transparent;
+  resize: none;
+  overflow: hidden;
+  font-family: var(--font-read);
+  font-weight: 600;
+  font-size: 1.05rem;
+  line-height: var(--line);
+  color: var(--ink);
+  white-space: pre-wrap;
+}
+
+.paper__body:focus { outline: none; }
+
+
+/* ============================================================
+   RESPONSIVE BREAKPOINTS
+   ============================================================ */
+
+@media (max-width: 720px) {
+  body { background-size: 20px 20px; }
+
+  .notebook-form__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .notebook-form__preview {
+    position: static;
+    max-width: 220px;
+    margin: 0 auto;
+  }
+
+  .notebook-view__body {
+    grid-template-columns: 1fr;
+  }
+
+  .paper__binding {
+    flex-basis: 26px;
+  }
+
+  .paper__sheet {
+    padding-left: 2.4rem;
+    padding-right: 1rem;
+  }
+
+  .notebook-view__title {
+    font-size: 1.8rem;
+  }
+}
+
+
+/* ============================================================
+   ACCESSIBILITY: REDUCED MOTION
+   ============================================================ */
+
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; }
+
+  .btn:hover,
+  .btn:active,
+  .shelf__item:hover .cover {
+    transform: none;
+  }
+
+  .shelf__item:nth-child(odd) .cover,
+  .shelf__item:nth-child(even) .cover {
+    transform: none;
+  }
+}

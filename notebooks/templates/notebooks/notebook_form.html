@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}New notebook · JournalNest{% endblock %}
+
+{% block content %}
+<section class="notebook-form">
+  <h1>New notebook</h1>
+
+  <div class="notebook-form__grid">
+    <form method="post" class="notebook-form__fields" id="notebook-form">
+      {% csrf_token %}
+      {{ form.non_field_errors }}
+
+      <label class="field">
+        <span class="field__label">Front label</span>
+        {{ form.label }}
+        {{ form.label.errors }}
+      </label>
+
+      <fieldset class="field">
+        <legend class="field__label">Notebook type</legend>
+        <p class="field__hint">Each type gives an editable page prompt. You can also start blank.</p>
+        {{ form.notebook_type }}
+      </fieldset>
+
+      <fieldset class="field">
+        <legend class="field__label">Cover colour</legend>
+        {{ form.cover_color }}
+      </fieldset>
+
+      <fieldset class="field">
+        <legend class="field__label">Cover pattern</legend>
+        {{ form.cover_pattern }}
+      </fieldset>
+
+      <fieldset class="field">
+        <legend class="field__label">Label font</legend>
+        {{ form.label_font }}
+      </fieldset>
+
+      <button type="submit" class="btn btn--primary">Create notebook</button>
+      <a class="btn btn--ghost" href="{% url 'shelf' %}">Cancel</a>
+    </form>
+
+    <aside class="notebook-form__preview" aria-live="polite">
+      <p class="field__label">Preview</p>
+      <article class="cover cover--cream cover--pattern-plain" id="cover-preview">
+        <span class="cover__spine" aria-hidden="true"></span>
+        <span class="cover__label font-caveat" id="cover-preview-label">Your label</span>
+        <span class="cover__type" id="cover-preview-type">Blank</span>
+      </article>
+    </aside>
+  </div>
+</section>
+{% endblock %}
+
+{% block scripts %}
+<script src="{% static 'js/cover_editor.js' %}"></script>
+{% endblock %}

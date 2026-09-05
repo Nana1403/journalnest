@@ -1,0 +1,82 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}{{ notebook.label }} · JournalNest{% endblock %}
+
+{% block content %}
+<section class="notebook-view">
+  <div class="notebook-view__bar">
+    <a class="btn btn--ghost" href="{% url 'shelf' %}">&larr; Shelf</a>
+    <h1 class="notebook-view__title font-{{ notebook.label_font }}">{{ notebook.label }}</h1>
+  </div>
+
+  <div class="notebook-view__body">
+    <details class="notebook-view__nav" open>
+      <summary>Pages</summary>
+      {% include "notebooks/_page_list.html" %}
+    </details>
+
+    <div class="notebook-view__page">
+      {% if note %}
+        <div class="editor-controls">
+          <div class="pager">
+            {% if prev_note %}
+              <a class="btn btn--ghost" href="{% url 'notebook_open' pk=notebook.pk %}?note={{ prev_note.pk }}">&larr; Previous</a>
+            {% else %}
+              <span class="btn btn--ghost is-disabled">&larr; Previous</span>
+            {% endif %}
+            {% if next_note %}
+              <a class="btn btn--ghost" href="{% url 'notebook_open' pk=notebook.pk %}?note={{ next_note.pk }}">Next &rarr;</a>
+            {% else %}
+              <span class="btn btn--ghost is-disabled">Next &rarr;</span>
+            {% endif %}
+          </div>
+          <div class="editor-controls__right">
+            <span class="save-status" id="save-status" data-state="saved">Saved</span>
+            <button type="button" class="btn btn--ghost" id="save-btn">Save</button>
+            <form method="post" action="{% url 'note_delete' pk=notebook.pk note_pk=note.pk %}"
+                  onsubmit="return confirm('Move this note to trash?');">
+              {% csrf_token %}
+              <button type="submit" class="btn btn--ghost btn--danger">Delete</button>
+            </form>
+          </div>
+        </div>
+
+        <div class="conflict-banner" id="conflict-banner" hidden>
+          <p>This note changed in another tab. Choose which version to keep:</p>
+          <button type="button" class="btn btn--ghost" id="conflict-reload">Load the other version</button>
+          <button type="button" class="btn btn--ghost" id="conflict-keep">Keep what I typed</button>
+        </div>
+
+        <div class="paper">
+          <div class="paper__binding" aria-hidden="true"></div>
+          <div class="paper__sheet">
+            <input type="text" class="paper__title font-{{ notebook.label_font }}"
+                   id="note-title" value="{{ note.title }}" maxlength="200"
+                   aria-label="Note title">
+            <textarea class="paper__body" id="note-body" spellcheck="true"
+                      aria-label="Note content">{{ note.content }}</textarea>
+          </div>
+        </div>
+
+        <div id="editor-data"
+             data-autosave-url="{% url 'note_autosave' pk=notebook.pk note_pk=note.pk %}"
+             data-revision="{{ note.revision }}"></div>
+      {% else %}
+        <div class="empty">
+          <p>This notebook has no notes yet.</p>
+          <form method="post" action="{% url 'note_create' pk=notebook.pk %}">
+            {% csrf_token %}
+            <button type="submit" class="btn btn--primary">Add the first note</button>
+          </form>
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</section>
+{% endblock %}
+
+{% block scripts %}
+{% if note %}
+<script src="{% static 'js/editor.js' %}"></script>
+{% endif %}
+{% endblock %}

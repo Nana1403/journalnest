@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block title %}Your shelf · JournalNest{% endblock %}
+
+{% block content %}
+<section class="shelf-page">
+  <div class="shelf-page__head">
+    <h1>Your notebooks</h1>
+    <a class="btn btn--primary" href="{% url 'notebook_create' %}">New notebook</a>
+  </div>
+
+  {% if notebooks %}
+    <div class="shelf">
+      {% for notebook in notebooks %}
+        <a class="shelf__item" href="{% url 'notebook_open' pk=notebook.pk %}">
+          {% include "notebooks/_cover.html" with notebook=notebook %}
+        </a>
+      {% endfor %}
+    </div>
+  {% else %}
+    <div class="empty">
+      <p>Your shelf is empty.</p>
+      <p>Create a notebook, write a label on its cover, and open it to start writing.</p>
+      <a class="btn btn--primary" href="{% url 'notebook_create' %}">Create your first notebook</a>
+    </div>
+  {% endif %}
+</section>
+{% endblock %}

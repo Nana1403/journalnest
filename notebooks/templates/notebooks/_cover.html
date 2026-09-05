@@ -1,0 +1,7 @@
+{% load static %}
+<article class="cover cover--{{ notebook.cover_color }} cover--pattern-{{ notebook.cover_pattern }}"
+         data-notebook="{{ notebook.pk }}">
+  <span class="cover__spine" aria-hidden="true"></span>
+  <span class="cover__label font-{{ notebook.label_font }}">{{ notebook.label }}</span>
+  <span class="cover__type">{{ notebook.get_notebook_type_display }}</span>
+</article>
