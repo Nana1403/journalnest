@@ -70,3 +70,18 @@ class SignupTests(TestCase):
         )
         self.assertRedirects(resp, reverse("shelf"))
         self.assertTrue(User.objects.filter(username="newbie").exists())
+
+
+class LandingTests(TestCase):
+    def test_anonymous_visitor_sees_welcome_with_links(self):
+        resp = self.client.get(reverse("root"))
+        self.assertEqual(resp.status_code, 200)
+        self.assertTemplateUsed(resp, "accounts/landing.html")
+        self.assertContains(resp, reverse("signup"))
+        self.assertContains(resp, reverse("login"))
+
+    def test_signed_in_visitor_is_sent_to_shelf(self):
+        User.objects.create_user("already", password="pw-already-123")
+        self.client.force_login(User.objects.get(username="already"))
+        resp = self.client.get(reverse("root"))
+        self.assertRedirects(resp, reverse("shelf"))

@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% block title %}Welcome · JournalNest{% endblock %}
+{% block body_class %}page-landing{% endblock %}
+
+{% block content %}
+<section class="landing">
+  <div class="landing__art" aria-hidden="true">
+    <svg viewBox="0 0 260 210" xmlns="http://www.w3.org/2000/svg">
+      <g stroke-linecap="round">
+        <path d="M28 44 v16 M20 52 h16" stroke="#FFB100" stroke-width="4"/>
+        <path d="M224 26 v13 M217 32 h13" stroke="#006C67" stroke-width="4"/>
+        <path d="M236 132 v11 M230 137 h11" stroke="#F194B4" stroke-width="4"/>
+      </g>
+      <g transform="rotate(-6 130 120)">
+        <rect x="66" y="52" width="126" height="150" rx="18" fill="#006C67" stroke="#003844" stroke-width="6"/>
+        <g fill="#FFB100" stroke="#003844" stroke-width="3">
+          <circle cx="66" cy="74" r="6"/><circle cx="66" cy="106" r="6"/>
+          <circle cx="66" cy="138" r="6"/><circle cx="66" cy="170" r="6"/>
+        </g>
+        <rect x="116" y="80" width="26" height="13" rx="2" fill="#FFB100" fill-opacity="0.85"
+              stroke="#003844" stroke-width="2" transform="rotate(-8 129 86)"/>
+        <rect x="88" y="92" width="82" height="52" rx="10" fill="#FFEBC6" stroke="#003844" stroke-width="5"/>
+        <circle cx="103" cy="126" r="6" fill="#F194B4"/>
+        <circle cx="155" cy="126" r="6" fill="#F194B4"/>
+        <g fill="#003844">
+          <circle cx="117" cy="114" r="4.5"/><circle cx="141" cy="114" r="4.5"/>
+        </g>
+        <path d="M114 126 q15 13 30 0" fill="none" stroke="#003844" stroke-width="4.5"/>
+        <path d="M192 118 q30 -4 34 -30" fill="none" stroke="#003844" stroke-width="7" stroke-linecap="round"/>
+        <circle cx="228" cy="84" r="10" fill="#FFEBC6" stroke="#003844" stroke-width="5"/>
+      </g>
+    </svg>
+  </div>
+
+  <h1 class="landing__title">Hello there! Welcome to JournalNest</h1>
+  <p class="landing__text">
+    A cozy little shelf for your notebooks &mdash; class notes, journals, project
+    plans, and every stray idea in between. Pick a cover, write a label on the
+    front, and start filling the pages.
+  </p>
+
+  <div class="landing__actions">
+    <a class="btn btn--primary btn--big" href="{% url 'signup' %}">Get started &rarr;</a>
+    <a class="btn btn--ghost btn--big" href="{% url 'login' %}">I already have an account</a>
+  </div>
+
+  <p class="landing__wink">No pressure &mdash; your notebooks stay private to you. 🤍</p>
+</section>
+{% endblock %}

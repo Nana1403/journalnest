@@ -10,7 +10,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@400;600;700;800&family=Caveat:wght@500;700&family=Gaegu:wght@400;700&family=Patrick+Hand&family=Shadows+Into+Light&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="{% static 'css/journalnest.css' %}">
 </head>
-<body>
+<body class="{% block body_class %}{% endblock %}">
   <header class="site-header">
     <a class="site-header__brand" href="{% url 'root' %}">📓 JournalNest</a>
     <nav class="site-header__nav">
