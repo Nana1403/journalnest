@@ -1,6 +1,6 @@
 ## 📓 JournalNest
 
-> *Your notes, inside notebooks that feel like your own. *
+  *Your notes, inside notebooks that feel like your own.*
 
 JournalNest is a cozy note-taking web app inspired by real notebooks. Users can create personalized notebooks, write labels on their covers, and organize their notes on notebook-style pages. It is designed for class notes, journals, project planning, creative ideas, and everyday thoughts—all in one private space.
 
