@@ -20,6 +20,10 @@ JournalNest currently includes:
 - **Validated requests:** Pydantic validates autosave and cover-customization data.
 - **Railway support:** Production settings are included for PostgreSQL, WhiteNoise, Gunicorn, and environment variables.
 
+## 🌐 Live Demo
+
+[Visit JournalNest](https://web-production-37b67.up.railway.app/)
+
 ## Planned Features
 
 Future updates will include:
